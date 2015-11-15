@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 file=$(mktemp)
-tee $file
+cat > $file
 echo $(cat $file|wc -c) >&2
 env >&2
 
