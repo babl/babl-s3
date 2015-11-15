@@ -1,12 +1,11 @@
 #!/bin/bash -x
 
+file=$(mktemp)
 cat > $file
 echo $(cat $file|wc -l) >&2
 cat $file
 
 exit 42
-
-file=$(mktemp)
 
 if [[ $CONTENTTYPE && ${CONTENTTYPE-x} ]]; then
   contentType="--content-type $CONTENTTYPE"
