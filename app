@@ -1,9 +1,9 @@
 #!/bin/bash
 
 file=$(mktemp)
-cat > $file
+tee $file
 echo $(cat $file|wc -l) >&2
-cat $file
+cat $file >&2
 
 exit 42
 
