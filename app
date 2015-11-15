@@ -1,16 +1,12 @@
-#!/bin/bash
+#!/bin/bash -x
 
 file=$(mktemp)
 tee $file
-echo $(cat $file|wc -l) >&2
-cat $file >&2
-
-exit 42
+echo $(cat $file|wc -c) >&2
 
 if [[ $CONTENTTYPE && ${CONTENTTYPE-x} ]]; then
   contentType="--content-type $CONTENTTYPE"
 fi
-
 
 out=$(aws s3 cp --debug --acl ${ACL-private} $contentType $file s3://$BUCKET$FILE)
 exitcode=$($?)
