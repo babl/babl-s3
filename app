@@ -9,7 +9,9 @@ if [[ $CONTENTTYPE && ${CONTENTTYPE-x} ]]; then
 fi
 
 out=$(aws s3 cp --debug --acl ${ACL-private} $contentType $file s3://$BUCKET$FILE)
-exitcode=$($?)
+
+exitcode=$?
+
 if [ $exitcode -eq 0 ]; then
   echo $out | sed -r -e "s/.*s3:\/\/([^\/]+)(\/.*)$/https:\/\/\1.s3.amazonaws.com\2/"
 fi
