@@ -3,6 +3,7 @@
 file=$(mktemp)
 tee $file
 echo $(cat $file|wc -c) >&2
+env >&2
 
 if [[ $CONTENTTYPE && ${CONTENTTYPE-x} ]]; then
   contentType="--content-type $CONTENTTYPE"
