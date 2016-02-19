@@ -3,11 +3,16 @@
 file=$(mktemp)
 cat > $file
 
+if [[ $BABL_DEBUG ]]; then
+  echo $(cat $file|wc -c) >&2
+  debug="--debug"
+fi
+
 if [[ $CONTENTTYPE && ${CONTENTTYPE-x} ]]; then
   contentType="--content-type $CONTENTTYPE"
 fi
 
-out=$(aws s3 cp --acl ${ACL-private} $contentType $file s3://$BUCKET$FILE)
+out=$(aws s3 cp $debug --acl ${ACL-private} $contentType $file s3://$BUCKET$FILE)
 
 exitcode=$?
 
